@@ -22,7 +22,7 @@ window.CONTENT = {
     "botao": "Orçamento"
   },
   "hero": {
-    "foto": "fotos/mwxx1n460-img-9962.jpg",
+    "foto": "fotos/mwxw99rd0-foto-s-topo-0.jpg",
     "etiqueta": "Delmiro Gouveia · Alagoas · Todo o Brasil e exterior",
     "titulo": "Fotógrafo de casamento",
     "subtitulo": "Registros sensíveis de casamentos, ensaios e eventos. Sediado em Delmiro Gouveia, atendo em todo o Brasil e também fora do país.",
