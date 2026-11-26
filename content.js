@@ -3,7 +3,7 @@ window.CONTENT = {
   "marca": {
     "nome": "Daniel Rafael Films",
     "logo": "fotos/mwxw9d242-foto-s-marca-0.png",
-    "favicon": "fotos/mwxw9eiw3-foto-s-marca-1.png"
+    "favicon": "favicon-daniel.png"
   },
   "seo": {
     "titulo": "Daniel Rafael | Fotógrafo de Casamento em Delmiro Gouveia - AL e todo o Brasil",
