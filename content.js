@@ -251,7 +251,7 @@ window.CONTENT = {
         "alt": ""
       },
       {
-        "src": "https://cdn.myportfolio.com/918ab475-da76-4f2f-806a-f98ecbeb5418/5e68b83e-810c-433d-8bbf-10efd3cc203d_rw_1920.jpeg?h=1e7cb21db682a8bce52d4d5889f2d951",
+        "src": "fotos/mwxvyk640-img-8615.jpg",
         "alt": ""
       }
     ]
