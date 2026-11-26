@@ -62,7 +62,6 @@ h2{font-family:'Cormorant Garamond',serif;font-weight:500;color:var(--wh);font-s
 .block.solo{grid-template-columns:1fr;max-width:760px;margin-left:auto;margin-right:auto}
 .block.rev{grid-template-columns:.95fr 1.05fr}
 .block.rev .txt{order:2}
-.num{font-family:'Cormorant Garamond',serif;font-size:96px;line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(239,231,191,.45);margin-bottom:6px}
 .frame{position:relative}
 .frame::after{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--line);z-index:0}
 .block.rev .frame::after{inset:18px 18px -18px -18px}
@@ -260,7 +259,6 @@ $('h-btn2').textContent=C.hero.botao2;
 (C.blocos||[]).forEach((b,i)=>{
   const d=el('div','block reveal'+(i%2?' rev':''));
   const t=el('div','txt');
-  t.appendChild(el('div','num',String(i+1).padStart(2,'0')));
   t.appendChild(el('div','eyebrow',b.etiqueta));
   t.appendChild(el('h2',null,b.titulo));
   const pb=el('div');paragraphs(pb,b.texto);t.appendChild(pb);

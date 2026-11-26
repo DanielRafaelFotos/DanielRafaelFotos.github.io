@@ -258,7 +258,7 @@ function secTopo(box){
 function secBlocos(box){
   box.textContent='';
   const B=S.data.blocos;
-  const intro=el('div','card');intro.appendChild(el('h2',null,'Blocos de texto com foto'));intro.appendChild(el('p','hint','São as seções entre o topo e a galeria. O número (01, 02...) aparece automaticamente na ordem. Para separar parágrafos, deixe uma linha em branco. Em “etiquetas”, separe por vírgula.'));
+  const intro=el('div','card');intro.appendChild(el('h2',null,'Blocos de texto com foto'));intro.appendChild(el('p','hint','São as seções entre o topo e a galeria. Para separar parágrafos, deixe uma linha em branco. Em “etiquetas”, separe por vírgula.'));
   box.appendChild(intro);
   const list=el('div');box.appendChild(list);
   const add=el('button','btn gold','＋ Novo bloco');add.onclick=()=>{B.push({etiqueta:'Nova seção',titulo:'Título',texto:'Escreva aqui.',tags:'',foto:''});dirty();draw()};

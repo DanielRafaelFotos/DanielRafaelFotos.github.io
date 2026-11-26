@@ -6,14 +6,14 @@ window.CONTENT = {
     "favicon": "https://cdn.myportfolio.com/918ab475-da76-4f2f-806a-f98ecbeb5418/6023bc09-9e47-467b-8d20-789e28ea63ab_carw_1x1x32.png?h=608fa83e75cf8a463eafe184d07ebf8c"
   },
   "seo": {
-    "titulo": "Daniel Rafael | Fotógrafo de Casamento em Delmiro Gouveia - AL",
-    "descricao": "Daniel Rafael, fotógrafo em Delmiro Gouveia, Alagoas. Casamentos, aniversários, ensaios externos, infantil, profissional, marca e eventos. Peça seu orçamento pelo WhatsApp."
+    "titulo": "Daniel Rafael | Fotógrafo de Casamento em Delmiro Gouveia - AL e todo o Brasil",
+    "descricao": "Daniel Rafael, fotógrafo em Delmiro Gouveia, Alagoas, atendendo em todo o Brasil e também no exterior. Casamentos, aniversários, ensaios externos, infantil, profissional, marca e eventos. Peça seu orçamento pelo WhatsApp."
   },
   "contato_info": {
     "whatsapp": "5582982316284",
     "instagram": "https://www.instagram.com/danielrafts/",
     "email": "",
-    "cidade": "Delmiro Gouveia, Alagoas e região"
+    "cidade": "Delmiro Gouveia - AL. Atendo em todo o Brasil e também no exterior"
   },
   "menu": {
     "inicio": "Início",
@@ -23,9 +23,9 @@ window.CONTENT = {
   },
   "hero": {
     "foto": "https://cdn.myportfolio.com/918ab475-da76-4f2f-806a-f98ecbeb5418/923a2031-f922-4334-af82-eb3f17b5172c_rwc_0x0x4000x5082x4096.jpg?h=fca2bdf77c02bc9d98b4fa51871be8d0",
-    "etiqueta": "Delmiro Gouveia · Alagoas",
+    "etiqueta": "Delmiro Gouveia · Alagoas · Todo o Brasil e exterior",
     "titulo": "Fotógrafo de casamento",
-    "subtitulo": "Registros sensíveis de casamentos, ensaios e eventos em Delmiro Gouveia e região.",
+    "subtitulo": "Registros sensíveis de casamentos, ensaios e eventos. Sediado em Delmiro Gouveia, atendo em todo o Brasil e também fora do país.",
     "botao": "Solicitar orçamento",
     "botao2": "Ver fotografias"
   },
@@ -259,7 +259,7 @@ window.CONTENT = {
   "chamada": {
     "etiqueta": "Vamos conversar",
     "titulo": "Por que contratar meu trabalho?",
-    "texto": "Porque suas memórias merecem atenção, técnica e carinho. Me chame no WhatsApp, conte a data e o local do seu evento e receba um orçamento personalizado.",
+    "texto": "Porque suas memórias merecem atenção, técnica e carinho. Atendo em todo o Brasil e também fora do país. Me chame no WhatsApp, conte a data e o local do seu evento e receba um orçamento personalizado.",
     "botao": "Falar no WhatsApp"
   },
   "contato": {
@@ -271,7 +271,7 @@ window.CONTENT = {
     "mensagem_whatsapp": "Olá Daniel, vim pelo site e gostaria de um orçamento."
   },
   "rodape": {
-    "descricao": "Fotógrafo em Delmiro Gouveia - AL e região",
+    "descricao": "Fotógrafo em Delmiro Gouveia - AL. Atendo em todo o Brasil e no exterior.",
     "copyright": "Daniel Rafael. Todos os direitos reservados."
   }
 };
