@@ -170,7 +170,7 @@ const picker=$('pick'),pickerMany=$('pickMany');
 let pickCb=null;
 picker.onchange=()=>{const f=picker.files[0];picker.value='';if(f&&pickCb)pickCb(f)};
 pickerMany.onchange=()=>{const fs=[...pickerMany.files];pickerMany.value='';if(fs.length&&pickCb)pickCb(fs)};
-const makePend=(f,keep)=>({__file:f,preview:URL.createObjectURL(f),keep:!!keep});
+const makePend=(f,keep,hd)=>({__file:f,preview:URL.createObjectURL(f),keep:!!keep,hd:!!hd});
 
 function fImage(label,getV,setV,o={}){
   const w=el('div','imgf');const pv=el('img','pv');w.appendChild(pv);
@@ -179,15 +179,15 @@ function fImage(label,getV,setV,o={}){
   const refresh=()=>{const v=getV();pv.src=view(v);i.value=isPend(v)?'(nova imagem selecionada, será enviada ao salvar)':(v||'');i.disabled=isPend(v)};
   i.oninput=()=>{setV(i.value);pv.src=view(i.value);dirty()};
   const row=el('div','row');const b=el('button','btn sm','Trocar imagem');b.type='button';
-  b.onclick=()=>{pickCb=f=>{setV(makePend(f,o.keep));refresh();dirty()};picker.click()};
+  b.onclick=()=>{pickCb=f=>{setV(makePend(f,o.keep,!o.keep));refresh();dirty()};picker.click()};
   row.appendChild(b);r.appendChild(i);r.appendChild(row);w.appendChild(r);refresh();return w;
 }
 
 /* ---------- Seções ---------- */
-const TABS=[['fotos','Fotografias'],['topo','Topo do site'],['blocos','Blocos de texto'],['contato','Chamada e contato'],['marca','Marca, rodapé e Google']];
+const TABS=[['topo','Início do site'],['fotos','Fotografias'],['blocos','Blocos de texto'],['contato','Chamada e contato'],['marca','Marca, rodapé e Google']];
 function build(){
   const tabs=$('tabs'),main=$('main');tabs.textContent='';main.textContent='';
-  const keep=sessionStorage.getItem('dr_tab')||'fotos';
+  const keep=sessionStorage.getItem('dr_tab')||'topo';
   TABS.forEach(([id,t])=>{
     const b=el('button','tab'+(id===keep?' on':''),t);b.onclick=()=>{sessionStorage.setItem('dr_tab',id);document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(x=>x.classList.toggle('on',x.id==='s_'+id))};tabs.appendChild(b);
     const s=el('section','sec'+(id===keep?' on':''));s.id='s_'+id;main.appendChild(s);
@@ -244,8 +244,17 @@ function secFotos(box){
 }
 
 function secTopo(box){
+  const P=el('div','card');P.appendChild(el('h2',null,'Fotos que aparecem no início do site'));
+  P.appendChild(el('p','hint','Aqui ficam as fotos de destaque: a capa (primeira tela), a foto de cada bloco logo abaixo e a foto ao lado do formulário. Clique em “Trocar imagem”, escolha a foto no seu computador ou celular e depois em “Salvar e publicar”. Essas fotos são enviadas em alta qualidade (HD).'));
+  const rd=()=>setTimeout(build,0);
+  P.appendChild(fImage('Foto de capa (primeira tela)',()=>S.data.hero.foto,v=>{S.data.hero.foto=v;rd()}));
+  const sl=el('label','f');sl.appendChild(document.createTextNode('Posição da foto de capa'));sl.appendChild(el('small',null,'Arraste para mostrar mais o alto ou mais a parte de baixo da foto na primeira tela.'));
+  const rg=el('input');rg.type='range';rg.min=0;rg.max=100;rg.value=(S.data.hero.posicao==null||S.data.hero.posicao==='')?42:S.data.hero.posicao;
+  rg.oninput=()=>{S.data.hero.posicao=parseInt(rg.value);dirty()};sl.appendChild(rg);P.appendChild(sl);
+  S.data.blocos.forEach(b=>P.appendChild(fImage('Foto do bloco: '+(b.titulo||b.etiqueta||''),()=>b.foto,v=>{b.foto=v;rd()})));
+  P.appendChild(fImage('Foto ao lado do formulário (aparece à direita)',()=>S.data.contato.foto,v=>{S.data.contato.foto=v;rd()}));
+  box.appendChild(P);
   const c=el('div','card');c.appendChild(el('h2',null,'Topo do site (primeira tela)'));
-  c.appendChild(fImage('Foto de capa',()=>S.data.hero.foto,v=>S.data.hero.foto=v));
   const g=el('div','grid2');
   g.appendChild(fText('Etiqueta pequena','hero.etiqueta'));g.appendChild(fText('Título grande','hero.titulo'));
   g.appendChild(fText('Botão principal (abre o WhatsApp)','hero.botao'));g.appendChild(fText('Botão secundário (rola até as fotos)','hero.botao2'));
@@ -316,10 +325,10 @@ async function prepare(p){
   const f=p.__file;
   if(!p.keep&&/^image\/(jpeg|png|webp)$/.test(f.type)){
     try{
-      const bmp=await createImageBitmap(f);const max=2000;const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
+      const bmp=await createImageBitmap(f);const max=p.hd?3200:2000;const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
       const w=Math.round(bmp.width*sc),h=Math.round(bmp.height*sc);
       const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(bmp,0,0,w,h);
-      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.86));
+      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',p.hd?.93:.86));
       if(blob)return{blob,ext:'jpg'};
     }catch(e){}
   }
