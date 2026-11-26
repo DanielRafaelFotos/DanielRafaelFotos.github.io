@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel do site | Daniel Rafael</title>
+<style>
+:root{--bg:#0a0a0a;--card:#161616;--card2:#1d1d1d;--tx:#d4d4d4;--wh:#f5f5f5;--gold:#efe7bf;--line:#2c2c2c;--err:#ff7b7b;--ok:#8fe3a1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:110px}
+a{color:var(--gold)}
+h1{font-size:20px;color:var(--wh);font-weight:600}
+h2{font-size:18px;color:var(--wh);margin:0 0 6px}
+h3{font-size:15px;color:var(--gold);margin:0 0 10px}
+.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.top .sp{flex:1}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:14px 20px 0}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--tx);padding:9px 16px;border-radius:6px;cursor:pointer;font:inherit}
+.tab.on{background:var(--gold);color:#111;border-color:var(--gold);font-weight:600}
+main{max-width:1080px;margin:0 auto;padding:20px}
+.sec{display:none}.sec.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label.f{display:grid;gap:5px;font-size:12px;letter-spacing:.04em;color:#a0a0a0;margin-bottom:12px}
+label.f small{color:#777;letter-spacing:0}
+input[type=text],input[type=number],input[type=password],input[type=email],textarea{width:100%;background:#0d0d0d;border:1px solid var(--line);color:var(--wh);font:inherit;padding:10px 12px;border-radius:6px;outline:none}
+input:focus,textarea:focus{border-color:var(--gold)}
+textarea{min-height:96px;resize:vertical}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--card2);color:var(--wh);border:1px solid #3a3a3a;border-radius:6px;padding:9px 14px;font:inherit;cursor:pointer}
+.btn:hover{border-color:var(--gold)}
+.btn.gold{background:var(--gold);color:#111;border-color:var(--gold);font-weight:600}
+.btn.gold[disabled]{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:5px 9px;font-size:13px}
+.btn.danger:hover{border-color:var(--err);color:var(--err)}
+.imgf{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start;margin-bottom:12px}
+.imgf .pv{width:110px;height:110px;object-fit:contain;background:#000 repeating-conic-gradient(#1a1a1a 0 25%,#000 0 50%) 0 0/16px 16px;border:1px solid var(--line);border-radius:6px}
+.imgf .cap{font-size:12px;color:#a0a0a0;margin-bottom:6px}
+.imgf .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.ph{background:var(--card2);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:grid}
+.ph.drag{outline:2px dashed var(--gold)}
+.ph .im{position:relative;aspect-ratio:2/3;background:#000;cursor:grab}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .n{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.75);color:#fff;font-size:12px;padding:1px 7px;border-radius:99px}
+.ph .new{position:absolute;right:6px;top:6px;background:var(--gold);color:#111;font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px}
+.ph .ctl{display:flex;gap:4px;padding:6px;flex-wrap:wrap}
+.ph input{font-size:12px;padding:6px 8px;margin:0 6px 6px;width:calc(100% - 12px)}
+.drop{border:2px dashed #3a3a3a;border-radius:10px;padding:18px;text-align:center;color:#a0a0a0;margin-top:14px}
+.drop.on{border-color:var(--gold);color:var(--gold)}
+.blk{border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;background:var(--card2)}
+.blk .bh{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.blk .bh h3{margin:0;flex:1}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(10,10,10,.96);border-top:1px solid var(--line);padding:12px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.bar .msg{flex:1;min-width:200px;font-size:14px}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.login{max-width:460px;margin:60px auto;padding:0 20px}
+.login .card{padding:24px}
+.hint{font-size:13px;color:#8a8a8a;margin-top:10px}
+.hint ol{margin:8px 0 0 20px}
+.hide{display:none!important}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}.imgf{grid-template-columns:84px 1fr}.imgf .pv{width:84px;height:84px}}
+</style>
+</head>
+<body>
+
+<!-- Entrada -->
+<div id="loginView" class="login hide">
+  <h1 style="margin-bottom:6px">Painel do site</h1>
+  <p class="hint" style="margin:0 0 18px">Área restrita. Para editar fotos e textos é preciso a chave de acesso do GitHub do dono do site.</p>
+  <div class="card">
+    <label class="f">Repositório do site (usuário/nome)
+      <input type="text" id="repoIn" placeholder="ex.: danielrafael/danielrafael.github.io" autocomplete="off">
+    </label>
+    <label class="f">Chave de acesso (token do GitHub)
+      <input type="password" id="tokIn" placeholder="github_pat_..." autocomplete="off">
+    </label>
+    <button class="btn gold" id="loginBtn">Entrar</button>
+    <p class="msg err" id="loginMsg" style="margin-top:12px"></p>
+    <div class="hint">
+      Como criar a chave (uma vez só):
+      <ol>
+        <li>Entre no GitHub, clique na sua foto, depois em <b>Settings</b>.</li>
+        <li>Na lateral, vá no final em <b>Developer settings</b>, depois <b>Personal access tokens</b>, depois <b>Fine-grained tokens</b> e <b>Generate new token</b>.</li>
+        <li>Dê um nome, escolha a validade, em <b>Repository access</b> marque <b>Only select repositories</b> e escolha o repositório do site.</li>
+        <li>Em <b>Permissions</b>, <b>Repository permissions</b>, coloque <b>Contents</b> como <b>Read and write</b>.</li>
+        <li>Clique em <b>Generate token</b> e cole a chave aqui. Ela só é mostrada uma vez, não compartilhe com ninguém.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- Painel -->
+<div id="appView" class="hide">
+  <div class="top">
+    <h1>Painel do site</h1>
+    <span class="hint" id="repoLbl" style="margin:0"></span>
+    <span class="sp"></span>
+    <a href="index.html" target="_blank" rel="noopener">Ver o site ↗</a>
+    <button class="btn sm" id="logoutBtn">Sair</button>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <main id="main"></main>
+  <div class="bar">
+    <span class="msg" id="msg"></span>
+    <button class="btn" id="discardBtn">Descartar alterações</button>
+    <button class="btn gold" id="saveBtn" disabled>Salvar e publicar</button>
+  </div>
+</div>
+
+<input type="file" id="pick" accept="image/*" class="hide">
+<input type="file" id="pickMany" accept="image/*" multiple class="hide">
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const LS='dr_admin_v1';
+const S={repo:'',token:'',sha:null,data:null,dirty:false,busy:false};
+const previews={}; // caminho salvo -> URL local (para mostrar antes do site atualizar)
+
+/* ---------- GitHub ---------- */
+async function gh(method,path,body){
+  const r=await fetch('https://api.github.com'+path,{method,headers:Object.assign({Authorization:'Bearer '+S.token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined});
+  let j=null;try{j=await r.json()}catch(e){}
+  if(!r.ok){const e=new Error((j&&j.message)||('Erro '+r.status));e.status=r.status;throw e}
+  return j;
+}
+const enc=p=>p.split('/').map(encodeURIComponent).join('/');
+const bytesToB64=u=>{let s='';for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s)};
+const textToB64=t=>bytesToB64(new TextEncoder().encode(t));
+const b64ToText=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g,'')),c=>c.charCodeAt(0)));
+async function getContent(){
+  const j=await gh('GET','/repos/'+S.repo+'/contents/content.js');
+  S.sha=j.sha;return b64ToText(j.content);
+}
+function parseContent(txt){
+  const i=txt.indexOf('window.CONTENT');const a=txt.indexOf('{',i);const b=txt.lastIndexOf('}');
+  if(i<0||a<0||b<0)throw new Error('Formato de content.js não reconhecido.');
+  return JSON.parse(txt.slice(a,b+1));
+}
+const serialize=d=>'// Conteúdo do site. Edite pelo painel (admin.html) ou direto aqui, mantendo o formato.\nwindow.CONTENT = '+JSON.stringify(d,null,2)+';\n';
+
+/* ---------- Estado / helpers ---------- */
+const get=(o,p)=>p.split('.').reduce((x,k)=>x==null?x:x[k],o);
+const set=(o,p,v)=>{const k=p.split('.');const last=k.pop();const t=k.reduce((x,kk)=>x[kk],o);t[last]=v};
+const isPend=v=>v&&typeof v==='object'&&v.__file;
+const view=v=>isPend(v)?v.preview:(previews[v]||v||'');
+function dirty(){S.dirty=true;$('saveBtn').disabled=false;msg('Há alterações não salvas.','')}
+function msg(t,c){const m=$('msg');m.textContent=t;m.className='msg '+(c||'')}
+addEventListener('beforeunload',e=>{if(S.dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- Campos ---------- */
+function fText(label,path,o={}){
+  const l=el('label','f');l.appendChild(document.createTextNode(label));
+  if(o.hint)l.appendChild(el('small',null,o.hint));
+  const i=o.area?el('textarea'):el('input');if(!o.area)i.type=o.number?'number':'text';
+  i.value=get(S.data,path)??'';
+  i.oninput=()=>{set(S.data,path,o.number?(parseInt(i.value)||0):i.value);dirty()};
+  l.appendChild(i);return l;
+}
+function fTextObj(label,obj,key,o={}){
+  const l=el('label','f');l.appendChild(document.createTextNode(label));
+  if(o.hint)l.appendChild(el('small',null,o.hint));
+  const i=o.area?el('textarea'):el('input');if(!o.area)i.type='text';
+  i.value=obj[key]??'';i.oninput=()=>{obj[key]=i.value;dirty()};
+  l.appendChild(i);return l;
+}
+const picker=$('pick'),pickerMany=$('pickMany');
+let pickCb=null;
+picker.onchange=()=>{const f=picker.files[0];picker.value='';if(f&&pickCb)pickCb(f)};
+pickerMany.onchange=()=>{const fs=[...pickerMany.files];pickerMany.value='';if(fs.length&&pickCb)pickCb(fs)};
+const makePend=(f,keep)=>({__file:f,preview:URL.createObjectURL(f),keep:!!keep});
+
+function fImage(label,getV,setV,o={}){
+  const w=el('div','imgf');const pv=el('img','pv');w.appendChild(pv);
+  const r=el('div');r.appendChild(el('div','cap',label));
+  const i=el('input');i.type='text';i.placeholder='Endereço da imagem (ou use o botão abaixo)';
+  const refresh=()=>{const v=getV();pv.src=view(v);i.value=isPend(v)?'(nova imagem selecionada, será enviada ao salvar)':(v||'');i.disabled=isPend(v)};
+  i.oninput=()=>{setV(i.value);pv.src=view(i.value);dirty()};
+  const row=el('div','row');const b=el('button','btn sm','Trocar imagem');b.type='button';
+  b.onclick=()=>{pickCb=f=>{setV(makePend(f,o.keep));refresh();dirty()};picker.click()};
+  row.appendChild(b);r.appendChild(i);r.appendChild(row);w.appendChild(r);refresh();return w;
+}
+
+/* ---------- Seções ---------- */
+const TABS=[['fotos','Fotografias'],['topo','Topo do site'],['blocos','Blocos de texto'],['contato','Chamada e contato'],['marca','Marca, rodapé e Google']];
+function build(){
+  const tabs=$('tabs'),main=$('main');tabs.textContent='';main.textContent='';
+  const keep=sessionStorage.getItem('dr_tab')||'fotos';
+  TABS.forEach(([id,t])=>{
+    const b=el('button','tab'+(id===keep?' on':''),t);b.onclick=()=>{sessionStorage.setItem('dr_tab',id);document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(x=>x.classList.toggle('on',x.id==='s_'+id))};tabs.appendChild(b);
+    const s=el('section','sec'+(id===keep?' on':''));s.id='s_'+id;main.appendChild(s);
+  });
+  secFotos($('s_fotos'));secTopo($('s_topo'));secBlocos($('s_blocos'));secContato($('s_contato'));secMarca($('s_marca'));
+}
+
+function secFotos(box){
+  box.textContent='';
+  const G=S.data.galeria;
+  const c=el('div','card');c.appendChild(el('h2',null,'Fotografias da galeria'));
+  c.appendChild(el('p','hint','Arraste as fotos para mudar a ordem, ou use as setas. “Remover” tira a foto da galeria. As fotos novas são reduzidas automaticamente para carregar rápido no site.'));
+  const g2=el('div','grid2');g2.style.marginTop='14px';
+  g2.appendChild(fText('Etiqueta pequena acima do título','galeria.etiqueta'));g2.appendChild(fText('Título da seção','galeria.titulo'));
+  g2.appendChild(fText('Quantas fotos aparecem antes do botão “ver todas”','galeria.inicial',{number:true}));g2.appendChild(fText('Texto do botão “ver todas”','galeria.botao_mais'));
+  c.appendChild(g2);box.appendChild(c);
+
+  const c2=el('div','card');
+  const head=el('div');head.style.cssText='display:flex;gap:10px;align-items:center;flex-wrap:wrap';
+  const cnt=el('h3',null,'');cnt.style.margin='0';cnt.style.flex='1';
+  const add=el('button','btn gold','＋ Adicionar fotos');add.onclick=()=>{pickCb=fs=>{fs.forEach(f=>G.fotos.push({src:makePend(f),alt:''}));dirty();draw()};pickerMany.click()};
+  head.appendChild(cnt);head.appendChild(add);c2.appendChild(head);
+  const grid=el('div','gal');c2.appendChild(grid);
+  const drop=el('div','drop','Ou solte aqui as fotos do computador');c2.appendChild(drop);
+  ['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('on')}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,()=>drop.classList.remove('on')));
+  drop.addEventListener('drop',e=>{e.preventDefault();const fs=[...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));if(fs.length){fs.forEach(f=>G.fotos.push({src:makePend(f),alt:''}));dirty();draw()}});
+  box.appendChild(c2);
+
+  let dragI=null;
+  function move(i,j){if(j<0||j>=G.fotos.length)return;const [x]=G.fotos.splice(i,1);G.fotos.splice(j,0,x);dirty();draw()}
+  function draw(){
+    grid.textContent='';cnt.textContent=G.fotos.length+' fotos';
+    G.fotos.forEach((f,i)=>{
+      const p=el('div','ph');p.draggable=true;
+      p.ondragstart=e=>{dragI=i;e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',String(i))}catch(_){}};
+      p.ondragover=e=>{if(dragI!==null){e.preventDefault();p.classList.add('drag')}};
+      p.ondragleave=()=>p.classList.remove('drag');
+      p.ondrop=e=>{if(dragI===null)return;e.preventDefault();e.stopPropagation();p.classList.remove('drag');const from=dragI;dragI=null;move(from,i)};
+      p.ondragend=()=>{dragI=null};
+      const im=el('div','im');const img=el('img');img.loading='lazy';img.src=view(f.src);img.alt='';im.appendChild(img);im.appendChild(el('span','n',String(i+1)));
+      if(isPend(f.src))im.appendChild(el('span','new','NOVA'));
+      p.appendChild(im);
+      const alt=el('input');alt.type='text';alt.placeholder='Descrição (opcional)';alt.value=f.alt||'';alt.oninput=()=>{f.alt=alt.value;dirty()};p.appendChild(alt);
+      const ctl=el('div','ctl');
+      const mk=(t,fn,cls,title)=>{const b=el('button','btn sm'+(cls?' '+cls:''),t);b.type='button';if(title)b.title=title;b.onclick=fn;ctl.appendChild(b)};
+      mk('◀',()=>move(i,i-1),'','Mover para antes');mk('▶',()=>move(i,i+1),'','Mover para depois');
+      mk('Trocar',()=>{pickCb=file=>{f.src=makePend(file);dirty();draw()};picker.click()});
+      mk('Remover',()=>{G.fotos.splice(i,1);dirty();draw()},'danger');
+      p.appendChild(ctl);grid.appendChild(p);
+    });
+  }
+  draw();
+}
+
+function secTopo(box){
+  const c=el('div','card');c.appendChild(el('h2',null,'Topo do site (primeira tela)'));
+  c.appendChild(fImage('Foto de capa',()=>S.data.hero.foto,v=>S.data.hero.foto=v));
+  const g=el('div','grid2');
+  g.appendChild(fText('Etiqueta pequena','hero.etiqueta'));g.appendChild(fText('Título grande','hero.titulo'));
+  g.appendChild(fText('Botão principal (abre o WhatsApp)','hero.botao'));g.appendChild(fText('Botão secundário (rola até as fotos)','hero.botao2'));
+  c.appendChild(g);c.appendChild(fText('Frase abaixo do título','hero.subtitulo',{area:true}));box.appendChild(c);
+  const m=el('div','card');m.appendChild(el('h3',null,'Textos do menu'));
+  const g2=el('div','grid2');g2.appendChild(fText('Início','menu.inicio'));g2.appendChild(fText('Fotografias','menu.fotos'));g2.appendChild(fText('Contato','menu.contato'));g2.appendChild(fText('Botão do menu (WhatsApp)','menu.botao'));
+  m.appendChild(g2);box.appendChild(m);
+}
+
+function secBlocos(box){
+  box.textContent='';
+  const B=S.data.blocos;
+  const intro=el('div','card');intro.appendChild(el('h2',null,'Blocos de texto com foto'));intro.appendChild(el('p','hint','São as seções entre o topo e a galeria. O número (01, 02...) aparece automaticamente na ordem. Para separar parágrafos, deixe uma linha em branco. Em “etiquetas”, separe por vírgula.'));
+  box.appendChild(intro);
+  const list=el('div');box.appendChild(list);
+  const add=el('button','btn gold','＋ Novo bloco');add.onclick=()=>{B.push({etiqueta:'Nova seção',titulo:'Título',texto:'Escreva aqui.',tags:'',foto:''});dirty();draw()};
+  box.appendChild(add);
+  function mv(i,j){if(j<0||j>=B.length)return;const [x]=B.splice(i,1);B.splice(j,0,x);dirty();draw()}
+  function draw(){
+    list.textContent='';
+    B.forEach((b,i)=>{
+      const d=el('div','blk');const h=el('div','bh');h.appendChild(el('h3',null,'Bloco '+String(i+1).padStart(2,'0')));
+      const mk=(t,fn,cls)=>{const x=el('button','btn sm'+(cls?' '+cls:''),t);x.type='button';x.onclick=fn;h.appendChild(x)};
+      mk('▲',()=>mv(i,i-1));mk('▼',()=>mv(i,i+1));mk('Remover',()=>{if(confirm('Remover este bloco?')){B.splice(i,1);dirty();draw()}},'danger');
+      d.appendChild(h);
+      d.appendChild(fImage('Foto do bloco',()=>b.foto,v=>b.foto=v));
+      const g=el('div','grid2');g.appendChild(fTextObj('Etiqueta pequena',b,'etiqueta'));g.appendChild(fTextObj('Título',b,'titulo'));d.appendChild(g);
+      d.appendChild(fTextObj('Texto',b,'texto',{area:true}));
+      d.appendChild(fTextObj('Etiquetas (separadas por vírgula)',b,'tags'));
+      list.appendChild(d);
+    });
+  }
+  draw();
+}
+
+function secContato(box){
+  const a=el('div','card');a.appendChild(el('h2',null,'Faixa “Por que contratar meu trabalho?”'));
+  const g=el('div','grid2');g.appendChild(fText('Etiqueta pequena','chamada.etiqueta'));g.appendChild(fText('Título','chamada.titulo'));g.appendChild(fText('Texto do botão','chamada.botao'));
+  a.appendChild(g);a.appendChild(fText('Texto','chamada.texto',{area:true}));box.appendChild(a);
+  const b=el('div','card');b.appendChild(el('h2',null,'Seção de contato'));
+  b.appendChild(fImage('Foto ao lado do formulário (aparece à direita)',()=>S.data.contato.foto,v=>S.data.contato.foto=v));
+  const g2=el('div','grid2');g2.appendChild(fText('Etiqueta pequena','contato.etiqueta'));g2.appendChild(fText('Título','contato.titulo'));g2.appendChild(fText('Texto do botão do formulário','contato.botao'));g2.appendChild(fText('Aviso abaixo do botão','contato.aviso'));
+  b.appendChild(g2);b.appendChild(fText('Mensagem inicial enviada no WhatsApp','contato.mensagem_whatsapp',{area:true}));box.appendChild(b);
+  const c=el('div','card');c.appendChild(el('h2',null,'Dados de contato'));
+  const g3=el('div','grid2');
+  g3.appendChild(fText('WhatsApp (só números, com 55 e DDD)','contato_info.whatsapp',{hint:'Exemplo: 5582982316284'}));
+  g3.appendChild(fText('Endereço do Instagram','contato_info.instagram'));
+  g3.appendChild(fText('E-mail (opcional)','contato_info.email'));g3.appendChild(fText('Local de atendimento','contato_info.cidade'));
+  c.appendChild(g3);box.appendChild(c);
+}
+
+function secMarca(box){
+  const a=el('div','card');a.appendChild(el('h2',null,'Marca'));
+  a.appendChild(fText('Nome da marca','marca.nome'));
+  a.appendChild(fImage('Logo (PNG com fundo transparente fica melhor)',()=>S.data.marca.logo,v=>S.data.marca.logo=v,{keep:true}));
+  a.appendChild(fImage('Ícone da aba do navegador (quadrado e pequeno)',()=>S.data.marca.favicon,v=>S.data.marca.favicon=v,{keep:true}));
+  box.appendChild(a);
+  const r=el('div','card');r.appendChild(el('h2',null,'Rodapé'));
+  r.appendChild(fText('Frase do rodapé','rodape.descricao'));r.appendChild(fText('Direitos autorais (depois do ano)','rodape.copyright'));box.appendChild(r);
+  const s=el('div','card');s.appendChild(el('h2',null,'Aparência no Google e nas redes'));
+  s.appendChild(fText('Título da página','seo.titulo'));s.appendChild(fText('Descrição (aparece nos resultados do Google)','seo.descricao',{area:true}));box.appendChild(s);
+}
+
+/* ---------- Envio de imagens ---------- */
+const extOf=f=>{const m=(f.name||'').match(/\.([a-z0-9]+)$/i);return (m?m[1]:'jpg').toLowerCase()};
+const slug=s=>(s||'foto').replace(/\.[^.]+$/,'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)||'foto';
+async function prepare(p){
+  const f=p.__file;
+  if(!p.keep&&/^image\/(jpeg|png|webp)$/.test(f.type)){
+    try{
+      const bmp=await createImageBitmap(f);const max=2000;const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
+      const w=Math.round(bmp.width*sc),h=Math.round(bmp.height*sc);
+      const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(bmp,0,0,w,h);
+      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.86));
+      if(blob)return{blob,ext:'jpg'};
+    }catch(e){}
+  }
+  return{blob:f,ext:extOf(f)};
+}
+let upN=0;
+async function uploadPending(){
+  const items=[];
+  const scan=(o,k)=>{if(isPend(o[k]))items.push([o,k])};
+  const D=S.data;
+  scan(D.hero,'foto');scan(D.contato,'foto');scan(D.marca,'logo');scan(D.marca,'favicon');
+  D.blocos.forEach(b=>scan(b,'foto'));D.galeria.fotos.forEach(f=>scan(f,'src'));
+  for(let n=0;n<items.length;n++){
+    const [o,k]=items[n];const p=o[k];
+    msg('Enviando imagem '+(n+1)+' de '+items.length+'...','');
+    const {blob,ext}=await prepare(p);
+    const buf=new Uint8Array(await blob.arrayBuffer());
+    const path='fotos/'+Date.now().toString(36)+(upN++)+'-'+slug(p.__file.name)+'.'+ext;
+    await gh('PUT','/repos/'+S.repo+'/contents/'+enc(path),{message:'Adiciona imagem pelo painel',content:bytesToB64(buf)});
+    previews[path]=p.preview;o[k]=path;
+  }
+  return items.length;
+}
+
+/* ---------- Salvar ---------- */
+async function save(){
+  if(S.busy)return;
+  const num=String(S.data.contato_info.whatsapp||'').replace(/\D/g,'');
+  if(num.length<12||num.length>13){msg('O WhatsApp precisa ter 55 + DDD + número (12 ou 13 dígitos). Veja a aba “Chamada e contato”.','err');return}
+  S.data.contato_info.whatsapp=num;
+  S.busy=true;$('saveBtn').disabled=true;$('discardBtn').disabled=true;
+  try{
+    const n=await uploadPending();
+    msg('Publicando textos...','');
+    const body={message:'Atualiza conteúdo pelo painel',content:textToB64(serialize(S.data)),sha:S.sha};
+    let res;
+    try{res=await gh('PUT','/repos/'+S.repo+'/contents/content.js',body)}
+    catch(e){
+      if(e.status===409||e.status===422){await getContent();body.sha=S.sha;res=await gh('PUT','/repos/'+S.repo+'/contents/content.js',body)}else throw e;
+    }
+    S.sha=res.content.sha;S.dirty=false;build();
+    msg('Salvo! '+(n?n+' imagem(ns) enviada(s). ':'')+'O site público atualiza em 1 a 2 minutos.','ok');
+  }catch(e){
+    $('saveBtn').disabled=false;
+    msg('Não foi possível salvar: '+(e.status===401||e.status===403?'a chave não tem permissão ou expirou. Saia e entre com uma nova chave.':e.message),'err');
+  }finally{S.busy=false;$('discardBtn').disabled=false}
+}
+
+/* ---------- Entrada / saída ---------- */
+async function enter(repo,token,remember){
+  S.repo=repo;S.token=token;
+  const info=await gh('GET','/repos/'+repo);
+  if(!(info.permissions&&info.permissions.push))throw new Error('Esta chave não tem permissão de edição neste repositório.');
+  S.data=parseContent(await getContent());S.dirty=false;
+  if(remember)localStorage.setItem(LS,JSON.stringify({repo,token}));
+  $('loginView').classList.add('hide');$('appView').classList.remove('hide');
+  $('repoLbl').textContent=repo;$('saveBtn').disabled=true;msg('','');build();
+}
+$('loginBtn').onclick=async()=>{
+  const repo=$('repoIn').value.trim().replace(/^https?:\/\/github\.com\//,'').replace(/\/$/,''),tok=$('tokIn').value.trim();
+  $('loginMsg').textContent='';
+  if(!/^[\w.-]+\/[\w.-]+$/.test(repo)||!tok){$('loginMsg').textContent='Preencha o repositório (usuario/nome) e a chave.';return}
+  $('loginBtn').disabled=true;
+  try{await enter(repo,tok,true)}
+  catch(e){$('loginMsg').textContent=e.status===401?'Chave inválida ou expirada.':e.status===404?'Repositório não encontrado ou a chave não tem acesso a ele.':e.message;S.token=''}
+  finally{$('loginBtn').disabled=false}
+};
+$('logoutBtn').onclick=()=>{if(S.dirty&&!confirm('Há alterações não salvas. Sair mesmo assim?'))return;localStorage.removeItem(LS);S.dirty=false;location.reload()};
+$('discardBtn').onclick=async()=>{if(!S.dirty||confirm('Descartar todas as alterações não salvas?')){try{S.data=parseContent(await getContent());S.dirty=false;$('saveBtn').disabled=true;build();msg('Alterações descartadas.','')}catch(e){msg(e.message,'err')}}};
+$('saveBtn').onclick=save;
+
+(function init(){
+  const h=location.hostname;let guess='';
+  if(h.endsWith('.github.io')){const o=h.split('.')[0];const seg=location.pathname.split('/')[1];guess=o+'/'+((seg&&!seg.includes('.'))?seg:o+'.github.io')}
+  let saved=null;try{saved=JSON.parse(localStorage.getItem(LS)||'null')}catch(e){}
+  $('repoIn').value=(saved&&saved.repo)||guess;
+  if(saved&&saved.repo&&saved.token){enter(saved.repo,saved.token,false).catch(()=>{localStorage.removeItem(LS);$('loginView').classList.remove('hide');$('loginMsg').textContent='Sua sessão expirou. Entre novamente.'})}
+  else $('loginView').classList.remove('hide');
+})();
+})();
+</script>
+</body>
+</html>
