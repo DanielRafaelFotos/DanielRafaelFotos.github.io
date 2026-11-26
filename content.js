@@ -28,7 +28,7 @@ window.CONTENT = {
     "subtitulo": "Registros sensíveis de casamentos, ensaios e eventos. Sediado em Delmiro Gouveia, atendo em todo o Brasil e também fora do país.",
     "botao": "Solicitar orçamento",
     "botao2": "Ver fotografias",
-    "posicao": 40
+    "posicao": 46
   },
   "blocos": [
     {
