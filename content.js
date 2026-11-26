@@ -36,21 +36,21 @@ window.CONTENT = {
       "titulo": "Cada casamento tem uma história própria",
       "texto": "Meu trabalho é registrar com sensibilidade os olhares, os abraços e os detalhes que fazem esse dia único, do preparo da noiva à festa.",
       "tags": "Cerimônia, Making of, Retratos do casal, Festa",
-      "foto": "fotos/mwxx67x71-img-0068-1.jpg"
+      "foto": "fotos/mwxy4e650-img-0659.jpg"
     },
     {
       "etiqueta": "Making of",
       "titulo": "Os preparativos também contam a história",
       "texto": "Do vestido ao buquê, das alianças aos nervosismos de última hora. Os momentos antes da cerimônia ganham um olhar atento e cuidadoso.",
       "tags": "",
-      "foto": "fotos/mwxx6ait2-whatsapp-image-2026-11-15-at-13-34-52.jpg"
+      "foto": "fotos/mwxy4guk1-img-0068.jpg"
     },
     {
       "etiqueta": "Mais que fotos",
       "titulo": "Outros momentos que merecem ser lembrados",
       "texto": "Além de casamentos, faço cobertura de aniversários, ensaios externos, ensaios infantis, trabalhos profissionais, fotos para marcas e eventos em geral.",
       "tags": "Aniversários, Ensaios externos, Infantil, Profissional, Marcas, Eventos",
-      "foto": "fotos/mwxx6cur3-img-0659.jpg"
+      "foto": "fotos/mwxy4ikv2-whatsapp-image-2026-11-15-at-13-34-52.jpg"
     }
   ],
   "galeria": {
