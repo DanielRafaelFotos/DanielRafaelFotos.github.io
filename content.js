@@ -88,10 +88,6 @@ window.CONTENT = {
         "alt": ""
       },
       {
-        "src": "fotos/mwxwa2ui14-foto-s-fotos-7.jpg",
-        "alt": ""
-      },
-      {
         "src": "fotos/mwxwa4tr15-foto-s-fotos-8.jpg",
         "alt": ""
       },
